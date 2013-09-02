@@ -21,6 +21,7 @@
 
 package es.pentalo.apps.RBPiCameraControl;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -28,8 +29,10 @@ import java.util.Map;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -41,7 +44,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
-import es.pentalo.apps.RBPiCameraControl.R;
 import es.pentalo.apps.RBPiCameraControl.API.Command;
 import es.pentalo.apps.RBPiCameraControl.API.RBPiCamera;
 
@@ -52,6 +54,7 @@ public class PhotoFragment extends Fragment {
 	private View myView;
 	private ImageView ivPhoto;
 	final List<Command> lCommands = new ArrayList<Command>();
+	private Bitmap mBitmap;
 	
 	@Override
 	public void onAttach(Activity activity) {
@@ -66,13 +69,21 @@ public class PhotoFragment extends Fragment {
 		myView = inflater.inflate(R.layout.photo, container, false);
 		
 		ivPhoto = (ImageView) myView.findViewById(R.id.ivPhoto);
-		
+				
 		Button btImage = (Button) myView.findViewById(R.id.btShot);
 		btImage.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {				
 				takePicture();
+			}
+		});
+		
+		ivPhoto.setOnClickListener( new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
 			}
 		});
 		
@@ -134,7 +145,10 @@ public class PhotoFragment extends Fragment {
 				pd.dismiss();
 			
 			if (result != null)
+			{
 				ivPhoto.setImageBitmap(result);
+				mBitmap = result;
+			}
 			else
 				Toast.makeText(getActivity(), getActivity().getString(R.string.toast_error_photo), Toast.LENGTH_LONG).show();
 				

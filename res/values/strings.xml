@@ -8,6 +8,12 @@
     <string name="pd_title_config">RBPi Camera</string>
     <string name="pd_message_config">Connecting with RBPi Camera ...</string>
 
+    <string name="dialog_title_rbpi_ip">Config RBPi</string>
+    <string name="dialog_message_rbpi_ip">Enter the IP address of RBPi</string>
+    <string name="toast_error_check_connection">Impossible connect with RBPi!</string>
+    <string name="pd_title_check">Checking</string>
+    <string name="pd_message_check">Checking connection with RBPi</string>
+    
     <string name="pd_title_photo">RBPi Camera</string>
     <string name="pd_message_photo">Getting image ...</string>
     <string name="toast_error_photo">Getting image failed!</string>

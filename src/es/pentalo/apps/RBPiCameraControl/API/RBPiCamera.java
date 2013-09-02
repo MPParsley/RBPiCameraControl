@@ -160,6 +160,8 @@ public class RBPiCamera {
 				return null;
 			
 			String str =  EntityUtils.toString(entity);
+			
+			Log.d(TAG, str);
 			return getStreamingURL(str);
 			
 	    } catch (ClientProtocolException e) {

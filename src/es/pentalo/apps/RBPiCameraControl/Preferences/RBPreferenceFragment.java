@@ -26,6 +26,8 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
@@ -34,6 +36,7 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.util.Log;
 import android.widget.Toast;
@@ -41,6 +44,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import es.pentalo.apps.RBPiCameraControl.Constants;
 import es.pentalo.apps.RBPiCameraControl.R;
 import es.pentalo.apps.RBPiCameraControl.API.Command;
 import es.rocapal.utils.Download.DownloadTextFileAsyncTask;
@@ -74,17 +78,42 @@ public class RBPreferenceFragment extends PreferenceFragment implements IDownloa
     	else
     		PREFIX = PREFIX_VIDEO;
     }
-    
+
     @Override
     public void onAttach(Activity activity) {
     	// TODO Auto-generated method stub
     	super.onAttach(activity);
+
+    	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+    	String urlCam = prefs.getString(Constants.KEY_PREF_RBPI_URL, null);
     	
-    	   DownloadTextFileAsyncTask myTask = 
-           		new DownloadTextFileAsyncTask(getActivity(), getString(R.string.pd_title_config), getString(R.string.pd_message_config));
-           myTask.setListener(this);
-           myTask.execute(Uri.parse(getString(R.string.rbpi_url) + "api/" + PREFIX.split("_")[0] + "/params/"));
+    	if (urlCam != null)
+    	{
+    		DownloadTextFileAsyncTask myTask = 
+    				new DownloadTextFileAsyncTask(getActivity(), getString(R.string.pd_title_config), getString(R.string.pd_message_config));
+    		myTask.setListener(this);
+    		myTask.execute(Uri.parse(urlCam + "api/" + PREFIX.split("_")[0] + "/params/"));
+    	}
     }
+    
+    private void setDefaultPrefs ()
+    {
+    	
+    	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+    	Editor editor = prefs.edit();
+    	
+    	String width = prefs.getString(PREFIX + "width", null);
+    	if (width == null)
+    		editor.putString(PREFIX + "width", "320");
+    	
+    	String height = prefs.getString(PREFIX + "height", null);
+    	if (height == null)
+    		editor.putString(PREFIX + "height", "240");
+    	
+    	editor.commit();
+    	
+    }
+    
     
     @Override
 	public void downloadedSuccessfully(Object data) {
@@ -97,7 +126,9 @@ public class RBPreferenceFragment extends PreferenceFragment implements IDownloa
 			Type listType = new TypeToken<List<Command>>() {}.getType();
 			mCommands = gson.fromJson(strJson, listType); 
 			
+			setDefaultPrefs();
 			showPreferences(); 
+			
     	}
     	catch (com.google.gson.JsonSyntaxException ex)
     	{
