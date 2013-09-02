@@ -21,7 +21,10 @@
 
 package es.pentalo.apps.RBPiCameraControl;
 
-import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -32,9 +35,10 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.Bitmap.CompressFormat;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -84,6 +88,26 @@ public class PhotoFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				
+				File sdCardDirectory = Environment.getExternalStorageDirectory();
+				File image = new File(sdCardDirectory, "rbpi.png");
+				FileOutputStream outStream;
+			    try {
+
+			        outStream = new FileOutputStream(image);
+			        mBitmap.compress(Bitmap.CompressFormat.PNG, 100, outStream);
+			        outStream.flush();
+			        outStream.close();
+			        
+			    } catch (FileNotFoundException e) {
+			        e.printStackTrace();
+			    } catch (IOException e) {
+			        e.printStackTrace();
+			    }
+			    
+				Intent intent = new Intent();
+				intent.setAction(Intent.ACTION_VIEW);
+				intent.setDataAndType(Uri.parse(sdCardDirectory.toURI().toString() + "/rbpi.png"), "image/*");
+				startActivity(intent);
 			}
 		});
 		
