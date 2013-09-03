@@ -17,8 +17,7 @@
     <string name="pd_title_photo">RBPi Camera</string>
     <string name="pd_message_photo">Getting image ...</string>
     <string name="toast_error_photo">Getting image failed!</string>
-    <string name="toast_error_preferences">Impossible to get preferences of RBPiCam</string>
-    <string name="rbpi_url">http://192.168.2.100:8000/</string>
+    <string name="toast_error_preferences">Impossible to get preferences of RBPiCam</string>   
     
     <string name="bt_shot_title">Take image!</string>
     <string name="bt_start_streaming_title">Start streaming</string>

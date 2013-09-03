@@ -82,7 +82,7 @@ public class RBPiCamera {
 	private HttpEntity getEntityPost (String url, List<Command> commands)
 	{
 		
-		
+		Log.d(TAG, url);
 		Gson gson = new Gson();
 		String json = gson.toJson(commands);
 		

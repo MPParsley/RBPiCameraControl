@@ -155,7 +155,10 @@ public class PhotoFragment extends Fragment {
 		
 		@Override
 		protected Bitmap doInBackground(Void... params) {
-			final RBPiCamera rbpiCamera = new RBPiCamera(getString(R.string.rbpi_url));
+			
+			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+			String urlCam = prefs.getString(Constants.KEY_PREF_RBPI_URL, null);
+			final RBPiCamera rbpiCamera = new RBPiCamera(urlCam);
 			return rbpiCamera.shotPhoto(lCommands);
 			
 		}

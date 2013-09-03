@@ -57,7 +57,9 @@ public class StreamingFragment  extends Fragment {
 			}
 		});
 		
-		rbpiCamera = new RBPiCamera(getString(R.string.rbpi_url));
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+		String urlCam = prefs.getString(Constants.KEY_PREF_RBPI_URL, null);
+		rbpiCamera = new RBPiCamera(urlCam);
 		
 		return myView;
 	}
