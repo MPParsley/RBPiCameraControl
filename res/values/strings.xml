@@ -20,12 +20,15 @@
     <string name="toast_error_preferences">Impossible to get preferences of RBPiCam</string>   
     
     <string name="bt_shot_title">Take image!</string>
-    <string name="bt_start_streaming_title">Start streaming</string>
+    <string name="bt_start_streaming_titleVLC">VLC Streaming</string>
+    <string name="bt_start_streaming_title">Own Streaming</string>
+    
     
     <string name="pd_title_streaming">RBPi Camera</string>
     <string name="pd_message_streaming">Get Streaming URL ...</string>
     <string name="pd_message_streaming_wait">Waiting to initialize of video streaming ...</string>
     <string name="toast_error_streaming">An error ocurred with the video streaming</string>
     
-    <string name="streaming_explication">RaspBerryPI camera module gets the video image in H264 format. This Android app use VLC Android app to show the video streaming, so let\'s ready to open VLC applications automatically!</string>
+    <string name="streaming_explication">RaspBerryPI camera module gets the video image in H264 format. \'VLC Streaming\' open vlc app to show de video streaming. \'Own streaming\' uses vlc libraries to show the streaming in this screen</string> 
+        
 </resources>

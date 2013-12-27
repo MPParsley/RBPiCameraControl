@@ -24,8 +24,7 @@
     	android:id="@+id/ivPhoto"
     	android:layout_marginRight="5dip"
     	android:layout_marginLeft="5dip"
-    	android:layout_marginBottom="5dip"
-    	
+    	android:layout_marginBottom="5dip"    	
      />
     
     

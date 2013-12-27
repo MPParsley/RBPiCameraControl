@@ -35,6 +35,8 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -174,12 +176,54 @@ public class PhotoFragment extends Fragment {
 			if (result != null)
 			{
 				ivPhoto.setImageBitmap(result);
+
 				mBitmap = result;
+				/*
+				ivPhoto.setBackgroundResource(R.drawable.hdimage);								
+
+				ivPhoto.setImageBitmap(BitmapFactory.decodeStream(getResources()
+								.openRawResource(R.drawable.hdimage)));
+				
+				Bitmap b = BitmapFactory.decodeStream(getResources().openRawResource(R.drawable.hdimage));
+				
+				final BitmapFactory.Options options = new BitmapFactory.Options();
+				options.inJustDecodeBounds = true;
+				
+			    BitmapFactory.decodeResource(getResources(), R.drawable.hdimage, options);
+			    options.inSampleSize = calculateInSampleSize(options, 500, 500);
+			    options.inJustDecodeBounds = false;
+			    
+				Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.hdimage, options);
+				ivPhoto.setImageBitmap(b);
+				*/
 			}
 			else
 				Toast.makeText(getActivity(), getActivity().getString(R.string.toast_error_photo), Toast.LENGTH_LONG).show();
 				
 		}
+	}
+	
+	public static int calculateInSampleSize(
+			BitmapFactory.Options options, int reqWidth, int reqHeight) {
+		// Raw height and width of image
+		final int height = options.outHeight;
+		final int width = options.outWidth;
+		int inSampleSize = 1;
+
+		if (height > reqHeight || width > reqWidth) {
+
+			// Calculate ratios of height and width to requested height and width
+			final int heightRatio = Math.round((float) height / (float) reqHeight);
+			final int widthRatio = Math.round((float) width / (float) reqWidth);
+
+			// Choose the smallest ratio as inSampleSize value, this will guarantee
+			// a final image with both dimensions larger than or equal to the
+			// requested height and width.
+			inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
+		}
+
+		return inSampleSize;
+
 	}
 
 	

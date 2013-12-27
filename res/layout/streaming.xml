@@ -1,33 +1,55 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/llMain"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"   
-    android:orientation="vertical"
-    android:id="@+id/llMain" >
-    
-    
-    <TextView 
-        
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-      	android:layout_width="wrap_content"
-    	android:layout_height="wrap_content"
-    	android:text="@string/streaming_explication"
-    	android:layout_marginTop="10dip"
-    	android:layout_marginRight="10dip"
-    	android:layout_marginLeft="10dip"
-    	android:layout_marginBottom="10dip"
-        />
+        android:layout_marginBottom="10dip"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:layout_marginTop="10dip"
+        android:text="@string/streaming_explication" />
+
+    <LinearLayout
+        android:id="@+id/llButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btStartStreamingVLC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dip"
+            android:layout_marginTop="20dip"
+            android:text="@string/bt_start_streaming_titleVLC" >
+        </Button>
+
+        <Button
+            android:id="@+id/btStartStreaming"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="20dip"
+            android:layout_marginTop="20dip"
+            android:text="@string/bt_start_streaming_title" />
+    </LinearLayout>
     
-    <Button 
-        android:layout_gravity="center"
-      	android:layout_width="wrap_content"
-    	android:layout_height="wrap_content"
-    	android:id="@+id/btStartStreaming"
-    	android:text="@string/bt_start_streaming_title"
-    	android:layout_marginTop="20dip"
-    	android:layout_marginBottom="20dip"
-    ></Button>
-    
-    
-    
- </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <SurfaceView
+            android:id="@+id/surface"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center" />
+    </LinearLayout>
+
+</LinearLayout>
